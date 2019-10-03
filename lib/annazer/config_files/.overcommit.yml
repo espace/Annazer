@@ -63,7 +63,7 @@ CommitMsg:
   MessageFormat:
     enabled: true
     description: 'Check commit message matches expected pattern'
-    pattern: '((.{4})-(.+))|(Merge.*)'
+    pattern: '((.{1,6})-(.+))|(Merge.*)'
     expected_pattern_message: '<Issue Id> <Commit Message Description> Or Merge <Branch ID> to <Branch ID>'
     sample_message: 'A2FL-1234 Refactored Onboarding flow or Merge Branch_name to master'
 
