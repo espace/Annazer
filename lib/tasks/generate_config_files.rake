@@ -19,7 +19,7 @@ namespace :annazer do
   end
 
   def no_existed_configuration_files?(args)
-    existed_files = %w[.rubocop.yml .overcommit.yml].map{|f| [f, File.file?(f)]}.to_h
+    existed_files = %w[.rubocop.yml .overcommit.yml .csslintrc .eslintignore .eslintrc.yml .reek.yml].map{|f| [f, File.file?(f)]}.to_h
     if existed_files.values.reduce(&:|) && args[:override] != "force"
       puts "Installation terminated. NO files has been generated"
       puts "The following file(s) exist(s):"
