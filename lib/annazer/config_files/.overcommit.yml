@@ -1,6 +1,6 @@
 # Use this file to configure the Overcommit hooks you wish to use. This will
 # extend the default configuration defined in:
-# https://github.com/causes/overcommit/blob/master/config/default.yml
+# https://github.com/brigade/overcommit/blob/master/config/default.yml
 #
 # At the topmost level of this YAML file is a key representing type of hook
 # being run (e.g. pre-commit, commit-msg, etc.). Within each type you can
@@ -8,24 +8,80 @@
 # `include`), whether to only display output if it fails (via `quiet`), etc.
 #
 # For a complete list of hooks, see:
-# https://github.com/causes/overcommit/tree/master/lib/overcommit/hook
+# https://github.com/brigade/overcommit/tree/master/lib/overcommit/hook
 #
 # For a complete list of options that you can use to customize hooks, see:
-# https://github.com/causes/overcommit#configuration
+# https://github.com/brigade/overcommit#configuration
 #
 # Uncomment the following lines to make the configuration take effect.
+gemfile: Gemfile
+PreCommit:
+  ALL:
+    problem_on_unmodified_line: ignore
+    on_warn: fail
+    quiet: true
+  RuboCop:
+      enabled: true
+      description: 'Analyze with RuboCop'
+      # command: ['bundle', 'exec', 'rubocop', '-c', '.rubocop.yml']
+  AuthorEmail:
+    enabled: true
+    description: 'Check author email'
+  AuthorName:
+    enabled: true
+    description: 'Check for author name'
+  RailsBestPractices:
+    enabled: true
+    description: 'Analyze with RailsBestPractices'
+  Brakeman:
+    enabled: true
+    description: 'Analyze with Brakeman'
+  Reek:
+    enabled: true
+    description: 'Analyze with Reek'
+  Flay:
+    enabled: true
+    description: 'Analyze ruby code for structural similarities with Flay'
+    include: '**/*.rb'
+    mass_threshold: 100
+  RailsSchemaUpToDate:
+    enabled: true
+    description: 'Check if database schema is up to date'
+    include:
+      - 'db/migrate/*.rb'
+      - 'db/schema.rb'
+      - 'db/structure.sql'
+  # ForbiddenBranches:
+  #   enabled: true
+  #   description: 'Check for commit to forbidden branch'
+  #   branch_patterns: ['test-overcommit']
+CommitMsg:
+  ALL:
+    quiet: true
+    on_warn: fail
 
-#PreCommit:
-#  Rubocop:
-#    on_warn: fail # Treat all warnings as failures
+  MessageFormat:
+    enabled: true
+    description: 'Check commit message matches expected pattern'
+    pattern: '((.{4})-(.+))|(Merge.*)'
+    expected_pattern_message: '<Issue Id> <Commit Message Description> Or Merge <Branch ID> to <Branch ID>'
+    sample_message: 'A2FL-1234 Refactored Onboarding flow or Merge Branch_name to master'
+
+  TextWidth:
+    enabled: true
+    description: 'Check text width'
+    max_subject_width: 50
+    min_subject_width: 0
+    max_body_width: 72
 #
 #  TrailingWhitespace:
+#    enabled: true
 #    exclude:
 #      - '**/db/structure.sql' # Ignore trailing whitespace in generated files
 #
 #PostCheckout:
 #  ALL: # Special hook name that customizes all hooks of this type
-#   quiet: true # Change all post-checkout hooks to only display output on failure
+#    quiet: true # Change all post-checkout hooks to only display output on failure
 #
 #  IndexTags:
 #    enabled: true # Generate a tags file with `ctags` each time HEAD changes

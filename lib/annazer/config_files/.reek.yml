@@ -1,0 +1,16 @@
+---
+detectors:
+  DuplicateMethodCall:
+    allow_calls:
+      - 'SecureRandom.hex'
+  UtilityFunction:
+    public_methods_only: true
+  TooManyStatements:
+    enabled: true
+    exclude:
+    - initialize
+    max_statements: 10
+  IrresponsibleModule:
+    enabled: false
+  NestedIterators:
+    max_allowed_nesting: 2
