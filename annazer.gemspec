@@ -22,4 +22,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'rails_best_practices', '~> 1.19.4'
   s.add_runtime_dependency 'reek', '~> 5.4.0'
   s.add_runtime_dependency 'rubocop-performance', '~> 1.3.0'
+  s.add_runtime_dependency 'strong_migrations', '~> 0.4.1'
 end
